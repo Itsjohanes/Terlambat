@@ -40,6 +40,7 @@ class Admin extends CI_Controller
     $this->db->select('*');
     $this->db->from('tb_siswa');
     $this->db->join('tb_terlambat', 'tb_siswa.id_siswa = tb_terlambat.id_siswa');
+    $this->db->where('date', date('Y-m-d'));
     $data['terlambat'] = $this->db->get()->result_array();
     if ($this->session->userdata('email') == '') {
       redirect('Auth');
@@ -140,6 +141,8 @@ class Admin extends CI_Controller
     $this->db->select('*');
     $this->db->from('tb_siswa');
     $this->db->join('tb_terlambat', 'tb_siswa.id_siswa = tb_terlambat.id_siswa');
+    //where tanggal hari ini
+    $this->db->where('date', date('Y-m-d'));
     $data['terlambat'] = $this->db->get()->result_array();
 
     if ($this->session->userdata('email') == '') {
@@ -217,6 +220,7 @@ class Admin extends CI_Controller
       $this->db->select('*');
       $this->db->from('tb_siswa');
       $this->db->join('tb_terlambat', 'tb_siswa.id_siswa = tb_terlambat.id_siswa');
+      $this->db->where('date', date('Y-m-d'));
       $keterlambatan = $this->db->get()->result();
       $no = 1;
       foreach ($keterlambatan as $data) {
