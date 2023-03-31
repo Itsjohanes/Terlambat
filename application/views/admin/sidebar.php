@@ -51,9 +51,16 @@
                         Data Siswa
                         </a>
                         <div class="sb-sidenav-menu-heading">Laporan Keterlambatan</div>
-                        <a class="nav-link" href="charts.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-chart-area"></i></div>
-                            Charts
+
+                        <?php
+                        if ($title == 'Mencatat Keterlambatan') {
+                            //arahih ke controller admin
+                            echo '<a class="nav-link active" href="' . base_url('Admin/terlambat') . '">';
+                        } else {
+                            echo '<a class="nav-link" href="' . base_url('Admin/terlambat') . '">';
+                        }
+                        ?> <div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
+                        Mencatat Keterlambatan
                         </a>
                         <a class="nav-link" href="tables.html">
                             <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>

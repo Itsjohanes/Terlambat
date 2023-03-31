@@ -83,6 +83,7 @@
                                             <a href="<?= base_url(); ?>Admin/editSiswa/<?= $j['id_siswa']; ?>" class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                         </td>
                                     </tr>
+
                                     <?php $i++; ?>
                                 <?php endforeach; ?>
                             </tbody>

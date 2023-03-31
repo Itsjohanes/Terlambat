@@ -111,6 +111,57 @@ class Admin extends CI_Controller
     $this->session->set_flashdata('category_success', 'Data berhasil diubah');
     redirect('Admin/siswa');
   }
+  public  function terlambat()
+  {
+    $data['title'] = "Mencatat Keterlambatan";
+    //mendapatkan data siswa dari database
+    $data['siswa'] = $this->db->get('tb_siswa')->result_array();
+
+    ///mendapatkan data terlambat dari database dengan menjoinkan table siswa dengan table terlambat
+    $this->db->select('*');
+    $this->db->from('tb_siswa');
+    $this->db->join('tb_terlambat', 'tb_siswa.id_siswa = tb_terlambat.id_siswa');
+    $data['terlambat'] = $this->db->get()->result_array();
+
+    if ($this->session->userdata('email') == '') {
+      redirect('Auth');
+    } else {
+      $this->load->view('admin/header', $data);
+      $this->load->view('admin/sidebar');
+      $this->load->view('admin/terlambat');
+      $this->load->view('admin/footer');
+    }
+  }
+  public function tambahTerlambat($id)
+  {
+    //mendapatkan tanggal hari ini
+    $tanggal = date("Y-m-d");
+    if ($this->session->userdata('email') == '') {
+      redirect('Auth');
+    } else {
+      $id_siswa = $id;
+      $data = [
+        'id_siswa' => $id_siswa,
+        'date' => $tanggal
+      ];
+      //masukan ke tb_siswa
+      $this->db->insert('tb_terlambat', $data);
+      //set flashdata category success
+      $this->session->set_flashdata('category_success', 'Data berhasil ditambahkan');
+      redirect('Admin/terlambat');
+    }
+  }
+  public function hapusTerlambat($id)
+  {
+    $this->db->where('id_terlambat', $id);
+    $this->db->delete('tb_terlambat');
+    //set flashdata category success
+    $this->session->set_flashdata('category_success', 'Data berhasil dihapus');
+    redirect('Admin/terlambat');
+  }
+  public function laporan()
+  {
+  }
 }
 
 
