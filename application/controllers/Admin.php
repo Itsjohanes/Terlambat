@@ -24,6 +24,7 @@ class Admin extends CI_Controller
   public function __construct()
   {
     parent::__construct();
+    $this->load->library('cetak_pdf');
   }
 
   public function index()
@@ -200,7 +201,6 @@ class Admin extends CI_Controller
       redirect('Auth');
     } else {
       $date = $this->input->post('date');
-      
     }
   }
 }
