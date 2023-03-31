@@ -62,9 +62,15 @@
                         ?> <div class="sb-nav-link-icon"><i class="fas fa-pencil-alt"></i></div>
                         Mencatat Keterlambatan
                         </a>
-                        <a class="nav-link" href="tables.html">
-                            <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
-                            Tables
+                        <?php
+                        if ($title == 'Cetak Laporan') {
+                            //arahih ke controller admin
+                            echo '<a class="nav-link active" href="' . base_url('Admin/laporan') . '">';
+                        } else {
+                            echo '<a class="nav-link" href="' . base_url('Admin/laporan') . '">';
+                        }
+                        ?> <div class="sb-nav-link-icon"><i class="fas fa-file-alt"></i></div>
+                        Cetak Laporan
                         </a>
                     </div>
                 </div>

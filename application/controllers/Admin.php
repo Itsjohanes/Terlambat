@@ -29,8 +29,18 @@ class Admin extends CI_Controller
   public function index()
   {
     $data['title'] = "Dashboard";
+    $data['tanggal'] = date('Y-m-d');
+    $data['jumlahSiswa'] = $this->db->get('tb_siswa')->num_rows();
+    //mendapatkan jumlahTerlambat hari ini
+    $data['jumlahTerlambat'] = $this->db->get_where('tb_terlambat', ['date' => date('Y-m-d')])->num_rows();
+
     //mendapatkan jumlah user dari database
     $data['jumlahAdmin'] = $this->db->get_where('tb_akun', ['aktif' => 1])->num_rows();
+    //mendapatkan siswa yang terlambat 
+    $this->db->select('*');
+    $this->db->from('tb_siswa');
+    $this->db->join('tb_terlambat', 'tb_siswa.id_siswa = tb_terlambat.id_siswa');
+    $data['terlambat'] = $this->db->get()->result_array();
     if ($this->session->userdata('email') == '') {
       redirect('Auth');
     } else {
@@ -44,6 +54,7 @@ class Admin extends CI_Controller
   public function siswa()
   {
     $data['title'] = "Data Siswa";
+
     //mendapatkan data siswa dari database
     $data['siswa'] = $this->db->get('tb_siswa')->result_array();
     if ($this->session->userdata('email') == '') {
@@ -77,11 +88,15 @@ class Admin extends CI_Controller
   }
   public function hapusSiswa($id)
   {
-    $this->db->where('id_siswa', $id);
-    $this->db->delete('tb_siswa');
-    //set flashdata category success
-    $this->session->set_flashdata('category_success', 'Data berhasil dihapus');
-    redirect('Admin/siswa');
+    if ($this->session->userdata('email') == '') {
+      redirect('Auth');
+    } else {
+      $this->db->where('id_siswa', $id);
+      $this->db->delete('tb_siswa');
+      //set flashdata category success
+      $this->session->set_flashdata('category_success', 'Data berhasil dihapus');
+      redirect('Admin/siswa');
+    }
   }
   public function editSiswa($id)
   {
@@ -98,18 +113,22 @@ class Admin extends CI_Controller
   }
   public function runEditSiswa()
   {
-    $id = $this->input->post('id_siswa');
-    $nama = $this->input->post('nama_siswa');
-    $kelas = $this->input->post('kelas_siswa');
-    $data = [
-      'nama_siswa' => $nama,
-      'kelas_siswa' => $kelas
-    ];
-    $this->db->where('id_siswa', $id);
-    $this->db->update('tb_siswa', $data);
-    //set flashdata category success
-    $this->session->set_flashdata('category_success', 'Data berhasil diubah');
-    redirect('Admin/siswa');
+    if ($this->session->userdata('email') == '') {
+      redirect('Auth');
+    } else {
+      $id = $this->input->post('id_siswa');
+      $nama = $this->input->post('nama_siswa');
+      $kelas = $this->input->post('kelas_siswa');
+      $data = [
+        'nama_siswa' => $nama,
+        'kelas_siswa' => $kelas
+      ];
+      $this->db->where('id_siswa', $id);
+      $this->db->update('tb_siswa', $data);
+      //set flashdata category success
+      $this->session->set_flashdata('category_success', 'Data berhasil diubah');
+      redirect('Admin/siswa');
+    }
   }
   public  function terlambat()
   {
@@ -153,14 +172,36 @@ class Admin extends CI_Controller
   }
   public function hapusTerlambat($id)
   {
-    $this->db->where('id_terlambat', $id);
-    $this->db->delete('tb_terlambat');
-    //set flashdata category success
-    $this->session->set_flashdata('category_success', 'Data berhasil dihapus');
-    redirect('Admin/terlambat');
+    if ($this->session->userdata('email') == '') {
+      redirect('Auth');
+    } else {
+      $this->db->where('id_terlambat', $id);
+      $this->db->delete('tb_terlambat');
+      //set flashdata category success
+      $this->session->set_flashdata('category_success', 'Data berhasil dihapus');
+      redirect('Admin/terlambat');
+    }
   }
   public function laporan()
   {
+    $data['title'] = "Cetak Laporan";
+    if ($this->session->userdata('email') == '') {
+      redirect('Auth');
+    } else {
+      $this->load->view('admin/header', $data);
+      $this->load->view('admin/sidebar');
+      $this->load->view('admin/laporan');
+      $this->load->view('admin/footer');
+    }
+  }
+  public function cetakLaporan()
+  {
+    if ($this->session->userdata('email') == '') {
+      redirect('Auth');
+    } else {
+      $date = $this->input->post('date');
+      
+    }
   }
 }
 
