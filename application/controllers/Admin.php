@@ -11,8 +11,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
  * @package   CodeIgniter
  * @category  Controller CI
  * @author    Johannes Alexander Putra <johannesap@upi.edu>
- * @author    Raul Guerrero <r.g.c@me.com>
- * @link      https://github.com/setdjod/myci-extension/
+ * @link      https://github.com/Itsjohanes
  * @param     ...
  * @return    ...
  *
@@ -178,6 +177,7 @@ class Admin extends CI_Controller
     } else {
       $this->db->where('id_terlambat', $id);
       $this->db->delete('tb_terlambat');
+
       //set flashdata category success
       $this->session->set_flashdata('category_success', 'Data berhasil dihapus');
       redirect('Admin/terlambat');

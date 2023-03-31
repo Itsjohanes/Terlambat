@@ -103,7 +103,7 @@
                                         <td><?= $j['nama_siswa']; ?></td>
                                         <td><?= $j['kelas_siswa']; ?></td>
                                         <td>
-                                            <a href="<?= base_url(); ?>Admin/hapusTerlambat/<?= $j['id_siswa']; ?>" class="btn btn-danger" onclick="return confirm('Data akan dihapus');"><i class="fas fa-trash-alt"></i></a>
+                                            <a href="<?= base_url(); ?>Admin/hapusTerlambat/<?= $j['id_terlambat']; ?>" class="btn btn-danger" onclick="return confirm('Data akan dihapus');"><i class="fas fa-trash-alt"></i></a>
                                         </td>
                                     </tr>
 
