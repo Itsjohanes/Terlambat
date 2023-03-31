@@ -17,14 +17,12 @@
 <script src="<?= base_url('assets/'); ?>js/datatables-simple-demo.js"></script>
 <script src="<?= base_url('assets/'); ?>vendor/jquery/jquery.min.js"></script>
 
-<script src="<?= base_url('assets/vendor/datatables/'); ?>jquery.dataTables.min.js"></script>
+<script src="<?= base_url('assets/vendor/datatables/'); ?>jquery.dataTables.min.js" type="text/javascript"></script>
 <script src="<?= base_url('assets/vendor/datatables/'); ?>dataTables.bootstrap4.min.js"></script>
 
 <!-- Page level custom scripts -->
 <script src="<?= base_url('assets/js/demo/'); ?>datatables-demo.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/litepicker/dist/litepicker.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 <!--Date Picker-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"></script>

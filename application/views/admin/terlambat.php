@@ -76,7 +76,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
                                     <th scope="col">No.</th>
@@ -86,15 +86,7 @@
 
                                 </tr>
                             </thead>
-                            <tfoot>
-                                <tr>
-                                    <th scope="col">No.</th>
-                                    <th scope="col">Nama</th>
-                                    <th scope="col">Kelas</th>
-                                    <th scope="col">Aksi</th>
 
-                                </tr>
-                            </tfoot>
                             <tbody>
                                 <?php $i = 1; ?>
                                 <?php foreach ($terlambat as $j) : ?>
