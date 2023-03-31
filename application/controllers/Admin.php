@@ -201,6 +201,31 @@ class Admin extends CI_Controller
       redirect('Auth');
     } else {
       $date = $this->input->post('date');
+      $judul = "Daftar Keterlambatan Siswa SMKN 1 CIMAHI " . $date;
+      $pdf = new FPDF('P', 'mm', 'Letter');
+
+      $pdf->AddPage();
+
+      $pdf->SetFont('Arial', 'B', 16);
+      $pdf->Cell(0, 7, $judul, 0, 1, 'C');
+      $pdf->Cell(10, 7, '', 0, 1);
+      $pdf->SetFont('Arial', 'B', 10);
+      $pdf->Cell(8, 6, 'No', 1, 0, 'C');
+      $pdf->Cell(100, 6, 'Nama', 1, 0, 'C');
+      $pdf->Cell(50, 6, 'Kelas', 1, 1, 'C');
+      $pdf->SetFont('Arial', '', 10);
+      $this->db->select('*');
+      $this->db->from('tb_siswa');
+      $this->db->join('tb_terlambat', 'tb_siswa.id_siswa = tb_terlambat.id_siswa');
+      $keterlambatan = $this->db->get()->result();
+      $no = 1;
+      foreach ($keterlambatan as $data) {
+        $pdf->Cell(8, 6, $no, 1, 0);
+        $pdf->Cell(100, 6, $data->nama_siswa, 1, 0);
+        $pdf->Cell(50, 6, $data->kelas_siswa, 1, 1);
+        $no++;
+      }
+      $pdf->Output();
     }
   }
 }
