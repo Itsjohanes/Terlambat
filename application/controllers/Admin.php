@@ -75,6 +75,42 @@ class Admin extends CI_Controller
       redirect('Admin/siswa');
     }
   }
+  public function hapusSiswa($id)
+  {
+    $this->db->where('id_siswa', $id);
+    $this->db->delete('tb_siswa');
+    //set flashdata category success
+    $this->session->set_flashdata('category_success', 'Data berhasil dihapus');
+    redirect('Admin/siswa');
+  }
+  public function editSiswa($id)
+  {
+    $data['title'] = "Edit Siswa";
+    $data['siswa'] = $this->db->get_where('tb_siswa', ['id_siswa' => $id])->row_array();
+    if ($this->session->userdata('email') == '') {
+      redirect('Auth');
+    } else {
+      $this->load->view('admin/header', $data);
+      $this->load->view('admin/sidebar');
+      $this->load->view('admin/editsiswa');
+      $this->load->view('admin/footer');
+    }
+  }
+  public function runEditSiswa()
+  {
+    $id = $this->input->post('id_siswa');
+    $nama = $this->input->post('nama_siswa');
+    $kelas = $this->input->post('kelas_siswa');
+    $data = [
+      'nama_siswa' => $nama,
+      'kelas_siswa' => $kelas
+    ];
+    $this->db->where('id_siswa', $id);
+    $this->db->update('tb_siswa', $data);
+    //set flashdata category success
+    $this->session->set_flashdata('category_success', 'Data berhasil diubah');
+    redirect('Admin/siswa');
+  }
 }
 
 
