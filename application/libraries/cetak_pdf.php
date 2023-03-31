@@ -1,5 +1,5 @@
 <?php
-class cetak_pdf
+class Cetak_pdf
 {
 
     function __construct()
